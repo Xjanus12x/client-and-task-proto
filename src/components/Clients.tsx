@@ -1,15 +1,17 @@
 import { Card } from "./Card";
 import type { Client } from "./AddClientForm";
 
-type TaskListProps = {
+type ClientsProps = {
   clients: Client[];
 };
 
-export function Clients({ clients }: TaskListProps) {
+export function Clients({ clients }: ClientsProps) {
   return (
     <ul>
       {clients.map((c, index) => (
-        <Card key={index} clientName={c.clientName} goals={c.goals} />
+        <li>
+          <Card key={index} clientName={c.clientName} goals={c.goals} />
+        </li>
       ))}
     </ul>
   );
