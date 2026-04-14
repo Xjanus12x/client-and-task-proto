@@ -12,8 +12,10 @@ export function Card({ clientName, goals }: Client) {
       }}
     >
       <h3 style={{ fontSize: "18px", fontWeight: "600", marginBottom: "8px" }}>
-        {clientName}
+        Client name: {clientName}
       </h3>
+
+      <p>Goals: </p>
       <ul style={{ paddingLeft: "20px" }}>
         {goals.map((goal, index) => (
           <li key={index} style={{ fontSize: "16px", marginBottom: "4px" }}>
