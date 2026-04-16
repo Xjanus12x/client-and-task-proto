@@ -1,20 +1,26 @@
-import { useState} from "react";
-import { Clients } from "./Clients";
+import { useEffect, useState } from "react";
+import { DataTable } from "./DataTable";
+import { useStats } from "../context/DashboardContext";
+
+export type ClientBaseType = {
+  id: string;
+  clientName: string;
+};
 
 export type AddClientFormData = {
-  clientName: string;
   goals: string;
-};
+} & ClientBaseType;
 
 export type Client = {
-  clientName: string;
   goals: string[];
-};
+} & ClientBaseType;
+
 export const AddClientForm = () => {
   const [formData, setFormData] = useState<Partial<AddClientFormData>>({});
   const [clients, setClients] = useState<Client[]>([]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { setTotalTasks } = useStats();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -32,6 +38,7 @@ export const AddClientForm = () => {
     setClients((prev) => [
       ...prev,
       {
+        id: Date.now().toString(),
         clientName: formData.clientName || "",
         goals: formData.goals ? formData.goals.split("\n") : [],
       },
@@ -45,6 +52,12 @@ export const AddClientForm = () => {
     formData.clientName.trim() &&
     formData.goals &&
     formData.goals.trim();
+
+  useEffect(() => {
+    setTotalTasks(
+      clients.reduce((acc, client) => acc + client.goals.length, 0),
+    );
+  }, [clients]);
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
@@ -159,7 +172,7 @@ export const AddClientForm = () => {
       </div>
       <div style={{ backgroundColor: "grey", width: "100%" }}>
         {clients.length > 0 ? (
-          <Clients clients={clients} />
+          <DataTable clients={clients} setClients={setClients} />
         ) : (
           <p style={{ textAlign: "center", color: "white" }}>
             No clients added yet.
