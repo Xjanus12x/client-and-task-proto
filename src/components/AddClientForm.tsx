@@ -40,10 +40,11 @@ export const AddClientForm = () => {
       {
         id: Date.now().toString(),
         clientName: formData.clientName || "",
-        goals: formData.goals ? formData.goals.split("\n") : [],
+        goals: formData.goals ? formData.goals.split("\n").filter(Boolean) : [],
       },
     ]);
     setIsSubmitting(false);
+
     setFormData({});
   };
 
@@ -164,7 +165,6 @@ export const AddClientForm = () => {
               cursor: isFormValid && !isSubmitting ? "pointer" : "not-allowed",
               opacity: isFormValid && !isSubmitting ? 1 : 0.6,
             }}
-            onClick={() => {}}
           >
             {isSubmitting ? "Adding..." : "Add Client"}
           </button>
