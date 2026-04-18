@@ -1,10 +1,8 @@
 import "./App.css";
 import AddClientForm from "./components/AddClientForm";
 import { FollowUps } from "./components/FollowUps";
-import { useStats } from "./context/DashboardContext";
 
 function App() {
-  const { totalTasks } = useStats();
   return (
     <>
       {/* <div style={{ display: "flex", gap: "12px" }}>

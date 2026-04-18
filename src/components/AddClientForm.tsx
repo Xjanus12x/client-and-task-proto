@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { useStats } from "../context/DashboardContext";
 import { DataTable } from "./DataTable";
 import { useDebounce } from "../hooks/useDebounce";
+import { SearchBar } from "./SearchBar";
 
 export type ClientBaseType = {
   id: string;
@@ -258,24 +259,9 @@ export const AddClientForm = () => {
       <div style={{ backgroundColor: "grey", width: "100%" }}>
         {clients.length > 0 ? (
           <div>
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
-                alignItems: "center",
-                padding: "16px",
-              }}
-            >
+            <div>
               <p>Clients {numberOfClients}</p>
-              <label style={{ flex: 1 }}>
-                {/* <span className="sr-only">Search clients</span> */}
-                <input
-                  type="text"
-                  placeholder="Search"
-                  style={{ width: "100%" }}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </label>
+              <SearchBar value={searchQuery} onChange={setSearchQuery} />
             </div>
 
             <DataTable

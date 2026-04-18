@@ -11,7 +11,6 @@ type FollowUp = {
   status: "Pending" | "Completed";
 };
 
-type FollowUpsProps = {};
 export function FollowUps() {
   const [followUps, setFollowUps] = useState<FollowUp[]>([
     {
