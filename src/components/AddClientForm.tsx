@@ -1,5 +1,4 @@
 import { useMemo, useRef, useState } from "react";
-import { useStats } from "../context/DashboardContext";
 import { DataTable } from "./DataTable";
 import { useDebounce } from "../hooks/useDebounce";
 import { SearchBar } from "./SearchBar";
